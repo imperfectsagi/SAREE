@@ -1,0 +1,72 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "main": ".open-next/worker.js",
+  "name": "aarti-sarees",
+  "compatibility_date": "2026-01-01",
+  "compatibility_flags": [
+    // Enable Node.js API — required by @opennextjs/cloudflare
+    // https://developers.cloudflare.com/workers/configuration/compatibility-flags/#nodejs-compatibility-flag
+    "nodejs_compat",
+    // Allow fetching public URLs (e.g. R2 public dev URLs, external APIs)
+    "global_fetch_strictly_public"
+  ],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "services": [
+    {
+      "binding": "WORKER_SELF_REFERENCE",
+      "service": "aarti-sarees"
+    }
+  ],
+
+  // ---------------------------------------------------------------------
+  // D1 — structured application data (products, categories, banners,
+  // blog posts, users, sessions, theme/site settings, etc.)
+  // Create with: npx wrangler d1 create aarti-sarees-db
+  // Then paste the returned database_id below.
+  // ---------------------------------------------------------------------
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "aarti-sarees-db",
+      "database_id": "3cb48d70-1c28-4187-8dbe-cfa623b37051",
+      "migrations_dir": "migrations"
+    }
+  ],
+
+  // ---------------------------------------------------------------------
+  // R2 — media storage (product images, banner images/videos, blog
+  // images, category images, logo/favicon).
+  // Create with: npx wrangler r2 bucket create aarti-sarees-media
+  // The second R2 bucket below is OPTIONAL and only used for Next.js'
+  // own build/data cache (ISR), per OpenNext's caching docs — separate
+  // from your media bucket above.
+  // ---------------------------------------------------------------------
+  "r2_buckets": [
+    {
+      "binding": "MEDIA_BUCKET",
+      "bucket_name": "aarti-sarees-media"
+    },
+    {
+      "binding": "NEXT_INC_CACHE_R2_BUCKET",
+      "bucket_name": "aarti-sarees-cache"
+    }
+  ],
+
+  "images": {
+    "binding": "IMAGES"
+  },
+
+  // ---------------------------------------------------------------------
+  // Non-secret environment variables. Secrets (session signing key,
+  // admin bootstrap password, etc.) are set separately via:
+  //   npx wrangler secret put SESSION_SECRET
+  // and must NEVER be committed here.
+  // ---------------------------------------------------------------------
+  "vars": {
+    "NEXT_PUBLIC_SITE_URL": "https://aartisarees.com",
+    "R2_PUBLIC_BASE_URL": "https://pub-5f67aa2637654088bfc009f3e09c41f4.r2.dev"
+  }
+}

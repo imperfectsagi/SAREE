@@ -1,0 +1,132 @@
+@import "tailwindcss";
+
+:root {
+  /* Theme tokens - defaults; overridden at runtime via admin (see layout.tsx theme injection) */
+  --primary: #8B1E3F;
+  --secondary: #4A1942;
+  --accent: #C9A227;
+  --background: #FDF8F5;
+  --surface: #FFFFFF;
+  --text: #1A1210;
+  --muted: #6B5B54;
+  --border: #E8DED6;
+  --button: #8B1E3F;
+  --button-text: #FFFFFF;
+  --success: #2E7D32;
+  --error: #C62828;
+  --warning: #F9A825;
+  --header: #FFFFFF;
+  --footer: #4A1942;
+  --card: #FFFFFF;
+  --sale: #C62828;
+  --badge: #C9A227;
+  --links: #8B1E3F;
+  --overlay: rgba(0,0,0,0.4);
+
+  /* Derived */
+  --primary-hover: #6F1832;
+  --accent-soft: #F8F1DE;
+  --shadow: 0 4px 20px rgba(26, 18, 16, 0.08);
+  --radius: 0.75rem;
+  --radius-sm: 0.5rem;
+  --radius-lg: 1rem;
+}
+
+@theme inline {
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-button: var(--button);
+  --color-button-text: var(--button-text);
+  --color-success: var(--success);
+  --color-error: var(--error);
+  --color-warning: var(--warning);
+  --font-sans: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--text);
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
+}
+
+.bg-primary { background-color: var(--primary); }
+.bg-secondary { background-color: var(--secondary); }
+.bg-accent { background-color: var(--accent); }
+.bg-surface { background-color: var(--surface); }
+.bg-background { background-color: var(--background); }
+.text-primary { color: var(--primary); }
+.text-secondary { color: var(--secondary); }
+.text-accent { color: var(--accent); }
+.text-muted { color: var(--muted); }
+.border-theme { border-color: var(--border); }
+.btn-primary {
+  background-color: var(--button);
+  color: var(--button-text);
+}
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+}
+
+.aspect-product {
+  aspect-ratio: 3 / 4;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.drawer-overlay {
+  background: rgba(26, 18, 16, 0.45);
+  backdrop-filter: blur(2px);
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
